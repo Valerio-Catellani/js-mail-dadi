@@ -19,8 +19,13 @@
 <body>
 
   <div class="container my-5 mx-auto rounded-3 border-3 d-flex justify-content-center flex-column ">
-    <input type="text" id="userValue" class="form-control m-3" value="">
-    <button class="btn-success btn my-3 mx-auto" id="userButton">Invia</button>
+    <div class="mb-3">
+      <label for="userValue" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="userValue" placeholder="Inserisci la tua mail">
+    </div>
+    <button type="button" class="btn-success btn btn-lg  my-3 mx-auto" id="log-in">Invia</button>
+    <div id="response"></div>
+    <button type="button" class="btn-danger btn btn-lg my-3 mx-auto disabled" id="play-button">Gioca a Dadi</button>
   </div>
 
 
