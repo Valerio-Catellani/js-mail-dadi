@@ -1,32 +1,48 @@
 
 let mail = document.getElementById("userValue");
-let response = document.getElementById("response")
-
+let userLogInResponse = document.getElementById("login-response")
 let arrayUsersMail = ["Pippo@gmail.com", "ZioLuciano@gmail.com", "SenatoreRomano@gmail.com", "Pizza@libero.it"];
-console.log(arrayUsersMail);
-
 const logIn = document.getElementById("log-in");
-let playButton = document.getElementById("play-button")
+const playButton = document.getElementById("play-button")
 
-
+mail.addEventListener("input", () => {
+    if (mail.value !== "") {
+        enableButtons(logIn);
+    }
+});
+let checkedUser = "";
 
 logIn.addEventListener('click', function () {
     let inputUserMail = mail.value;
-    let checkedUserMail = "";
     let userFlag = false;
     for (let i = 0; i < arrayUsersMail.length; i++) {
         if (arrayUsersMail[i].toLocaleLowerCase() === inputUserMail.toLocaleLowerCase()) {
             userFlag = true;
-            checkedUserMail = arrayUsersMail[i];
-            enbaleButtons(playButton);
-
+            checkedUser = inputUserMail.substr(0, inputUserMail.indexOf("@"))
+            logIn.classList.add("d-none")
+            mail.classList.add("d-none")
+            enableButtons(playButton);
         }
     }
-    response.innerHTML = (userFlag === true ? `<h3>Bentornato ${inputUserMail.substr(0, inputUserMail.indexOf("@"))}</h3>` : '<h3>Devi registrarti per poter giocare</h3>')
+    userLogInResponse.innerHTML = (userFlag === true ? `<h3>Bentornato ${checkedUser}</h3>` : '<h3>Devi registrarti per poter giocare</h3>')
 })
 
-function enbaleButtons(element) {
+function enableButtons(element) {
     element.classList.remove("disabled")
 }
 
-//  response.innerHTML = `<h3>Bentornato ${inputUserMail.substr(inputUserMail.indexOf("@"))}</h3>` : response.innerHTML = `<h3>Devi registrarti per poter giocare</h3>`
+let gameResponse = document.getElementById('game-response')
+
+playButton.addEventListener('click', function () {
+    console.log("ciao");
+    let userRoll = getRndInteger(1, 6);
+    let pcRoll = getRndInteger(1, 6);
+    if (userRoll > pcRoll) {
+        gameResponse.innerHTML = `<h3>${checkedUser} ha vinto con ${userRoll} contro il PC con ${pcRoll}</h3>`
+    } else if (userRoll < pcRoll) {
+        gameResponse.innerHTML = `<h3>${checkedUser} ha perso con ${userRoll} contro il PC con ${pcRoll}</h3>`
+    } else {
+        gameResponse.innerHTML = `<h3>${checkedUser} e PC hanno pareggiato con ${pcRoll}</h3>`
+    };
+    playButton.innerHTML = "Gioca di Nuovo"
+})
