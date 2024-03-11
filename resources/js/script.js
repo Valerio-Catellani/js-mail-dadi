@@ -25,24 +25,71 @@ logIn.addEventListener('click', function () {
         }
     }
     userLogInResponse.innerHTML = (userFlag === true ? `<h3>Bentornato ${checkedUser}</h3>` : '<h3>Devi registrarti per poter giocare</h3>')
+    console.log(checkedUser);
 })
 
 function enableButtons(element) {
     element.classList.remove("disabled")
 }
 
+
+let playerNameTab = document.querySelector("h2")
 let gameResponse = document.getElementById('game-response')
+let rollResults = document.querySelector('.results')
 
 playButton.addEventListener('click', function () {
-    console.log("ciao");
+    playerNameTab.innerHTML = checkedUser;
+    gameResponse.innerHTML = "";
+    //rollResults.classList.remove("d-none");
     let userRoll = getRndInteger(1, 6);
     let pcRoll = getRndInteger(1, 6);
-    if (userRoll > pcRoll) {
-        gameResponse.innerHTML = `<h3>${checkedUser} ha vinto con ${userRoll} contro il PC con ${pcRoll}</h3>`
-    } else if (userRoll < pcRoll) {
-        gameResponse.innerHTML = `<h3>${checkedUser} ha perso con ${userRoll} contro il PC con ${pcRoll}</h3>`
-    } else {
-        gameResponse.innerHTML = `<h3>${checkedUser} e PC hanno pareggiato con ${pcRoll}</h3>`
-    };
-    playButton.innerHTML = "Gioca di Nuovo"
+    rolldice(playerDice, userRoll);
+    rolldice(pcDice, pcRoll);
+    playButton.classList.add("disabled");
+    setTimeout(() => {
+        if (userRoll > pcRoll) {
+            gameResponse.innerHTML = `<h3>${checkedUser} ha vinto con ${userRoll} contro il PC con ${pcRoll}</h3>`
+        } else if (userRoll < pcRoll) {
+            gameResponse.innerHTML = `<h3>${checkedUser} ha perso con ${userRoll} contro il PC con ${pcRoll}</h3>`
+        } else {
+            gameResponse.innerHTML = `<h3>${checkedUser} e PC hanno pareggiato con ${pcRoll}</h3>`
+        };
+        enableButtons(playButton);
+        playButton.innerHTML = "Gioca di Nuovo";
+    }, 6000);
+
 })
+
+
+/*
+!My BONUS
+*/
+
+let playerDice = document.getElementById("player-dice")
+let pcDice = document.getElementById("pc-dice")
+
+function rolldice(dice, result) {
+    let xRandom;
+    let yRandom;
+    if (result === 1) {
+        xRandom = 360 * getRndInteger(1, 24);
+        yRandom = 360 * getRndInteger(1, 24);
+    } else if (result === 2) {
+        xRandom = 180 + ((360) * getRndInteger(1, 24));
+        yRandom = 360 * getRndInteger(1, 24);
+    } else if (result === 3) {
+        xRandom = (360) * getRndInteger(1, 24);
+        yRandom = 270 + (360 * getRndInteger(1, 24));
+    } else if (result === 4) {
+        console.log("4");
+        xRandom = 360 * getRndInteger(1, 24);
+        yRandom = 90 + (360 * getRndInteger(1, 24));
+    } else if (result === 5) {
+        xRandom = 270 + (360 * getRndInteger(1, 24));
+        yRandom = 360 * getRndInteger(1, 24);
+    } else {
+        xRandom = (90) + ((360) * getRndInteger(1, 24));
+        yRandom = 360 * getRndInteger(1, 24);
+    }
+    dice.style.transform = `rotateX(${xRandom}deg) rotateY(${yRandom}deg) `;
+}

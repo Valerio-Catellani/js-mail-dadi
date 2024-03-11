@@ -15,6 +15,10 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getRndDeg(min, max) {
+    return (Math.floor(Math.random() * (max - min)) + min) * 90;
+}
+
 function isaN(value) {
     return !isNaN(value)
 }
