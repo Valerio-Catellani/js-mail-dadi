@@ -71,24 +71,23 @@ function rolldice(dice, result) {
     let xRandom;  //randomizzo le varie rotazione facendo in modo da ottenere solo dei multipli
     let yRandom;
     if (result === 1) {
-        xRandom = 360 * getRndInteger(1, 24);
-        yRandom = 360 * getRndInteger(1, 24);
+        xRandom = 360 * getRndInteger(4, 24);
+        yRandom = 360 * getRndInteger(4, 24);
     } else if (result === 2) {
-        xRandom = 180 + ((360) * getRndInteger(1, 24));
-        yRandom = 360 * getRndInteger(1, 24);
+        xRandom = 180 + ((360) * getRndInteger(4, 24));
+        yRandom = 360 * getRndInteger(4, 24);
     } else if (result === 3) {
-        xRandom = (360) * getRndInteger(1, 24);
-        yRandom = 270 + (360 * getRndInteger(1, 24));
+        xRandom = (360) * getRndInteger(4, 24);
+        yRandom = 270 + (360 * getRndInteger(4, 24));
     } else if (result === 4) {
-        console.log("4");
-        xRandom = 360 * getRndInteger(1, 24);
-        yRandom = 90 + (360 * getRndInteger(1, 24));
+        xRandom = 360 * getRndInteger(4, 24);
+        yRandom = 90 + (360 * getRndInteger(4, 24));
     } else if (result === 5) {
-        xRandom = 270 + (360 * getRndInteger(1, 24));
-        yRandom = 360 * getRndInteger(1, 24);
+        xRandom = 270 + (360 * getRndInteger(4, 24));
+        yRandom = 360 * getRndInteger(4, 24);
     } else {
-        xRandom = (90) + ((360) * getRndInteger(1, 24));
-        yRandom = 360 * getRndInteger(1, 24);
+        xRandom = (90) + ((360) * getRndInteger(4, 24));
+        yRandom = 360 * getRndInteger(4, 24);
     }
     dice.style.transform = `rotateX(${xRandom}deg) rotateY(${yRandom}deg) `; //rollo i dadi
 }
